@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Kamar Jeruk</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,300;0,400;0,700;1,700&display=swap" rel="stylesheet">
+
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+
+    <!-- My Style -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Navbar start -->
+    <nav class="navbar">
+        <a href="#" class="navbar-logo">Homestay<span>setiabudi</span>.</a>
+
+        <div class="navbar-nav">
+            <a href="index.html">Beranda</a>
+        </div>
+        <div class="navbar-extra">
+
+            <a href="whatsapp://send?text=Hello&phone=+6285717252778" id="phone">
+                <i data-feather="phone"></i>
+            </a>
+            <a href="#" id="hamburger-menu">
+                <i data-feather="menu"></i>
+            </a>
+        </div>
+
+    </nav>
+    <!-- Navbar end -->
+
+
+
+    <section id="menu" class="menu">
+        <h2><span>Kamar</span> Jeruk</h2>
+        <div class="row">
+            <div class="room-card">
+                <img src="img/room/jeruk.jpeg" alt="kamar3" class="room-card-img">
+                <img src="img/room/jeruk1.jpg" alt="kamar1" class="room-card-img">
+                <img src="img/room/jeruk2.jpg" alt="kamar2" class="room-card-img">
+                <h3 class="room-card-title">-Kamar Jeruk-</h3>
+                <p class="room-card-price">Rp.1.000.000 / Malam</p>
+                <p>Kapasita 6 orang</p>
+                <p> Fasilitas Kamar Jeruk : 2 Kamar mandi pribadi, Ac, wifi, Ruang tamu bersama, Ruang makan bersama, Tempat parkir
+                </p>
+                <button type="submit" class="btn" onclick="kirimPesan()">Pesan Kamar</button>
+            </div>
+
+
+            <script>
+                function kirimPesan() {
+                    // Buat pesan WhatsApp
+                    const pesan = `Halo apakah kamar Jeruk masih tersedia.`;
+
+                    // Buat link dengan nomor tujuan WhatsApp
+                    const link = `https://wa.me/6285717252778?text=${encodeURIComponent(pesan)}`;
+
+                    // Buka link WhatsApp di tab baru
+                    window.open(link, '_blank');
+                }
+            </script>
+        </div>
+    </section>
+    <!-- Feather Icons -->
+    <script>
+        feather.replace()
+    </script>
+
+
+    <!-- My Javascript -->
+    <script src="js/script.js"></script>
+</body>
+
+</html>
