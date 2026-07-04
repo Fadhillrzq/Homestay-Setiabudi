@@ -25,7 +25,7 @@
 
     <!-- Navbar start -->
     <nav class="navbar">
-        <a href="#" class="navbar-logo">Homestay<span>setiabudi</span>.</a>
+        <a href="#" class="navbar-logo">Homestay<span>setiabudi</span></a>
 
 
         <div class="navbar-nav">
@@ -161,21 +161,60 @@
             <form action="">
                 <div class="input-group">
                     <i data-feather="user"></i>
-                    <input type="text" id="nama" placeholder="nama">
+                    <input type="text" id="nama" placeholder="nama" required>
                 </div>
-                <div class="input-group">
+
+                <div class="input-group" id="formPesan">
                     <i data-feather="mail"></i>
-                    <input type="email" id="email" placeholder="email" required pattern="[a-zA-Z0-9._%+-]+@gmail\.com$">
+                    <input type="email" id="email" placeholder="email" required pattern="[a-zA-Z0-9._%+-]+@gmail\.com$" title="Email harus menggunakan @gmail.com">
                 </div>
+
                 <div class="input-group">
                     <i data-feather="phone"></i>
-                    <input type="number" id="nomor_hp" placeholder="nomor hp">
+                    <input type="tel" id="nomor_hp" inputmode="numeric" placeholder="0857645123123" maxlength="13" required>
                 </div>
 
                 <button type="submit" class="btn" onclick="kirimPesan()">kirim pesan</button>
             </form>
 
             <script>
+                // Batasi input nomor HP: hanya angka, maksimal 13 digit
+                document.getElementById('nomor_hp').addEventListener('input', function(e) {
+                    // Hapus semua karakter selain angka
+                    let hanyaAngka = this.value.replace(/[^0-9]/g, '');
+                    // Potong maksimal 13 digit
+                    if (hanyaAngka.length > 13) {
+                        hanyaAngka = hanyaAngka.slice(0, 13);
+                    }
+                    this.value = hanyaAngka;
+                });
+
+                // Validasi saat form disubmit
+                document.getElementById('formPesan').addEventListener('submit', function(e) {
+                    e.preventDefault(); // hentikan submit dulu untuk validasi manual
+
+                    const nama = document.getElementById('nama').value.trim();
+                    const email = document.getElementById('email').value.trim();
+                    const nomorHp = document.getElementById('nomor_hp').value.trim();
+
+                    // Validasi email harus @gmail.com
+                    const regexEmail = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
+                    if (!regexEmail.test(email)) {
+                        alert('Email harus menggunakan @gmail.com');
+                        return;
+                    }
+
+                    // Validasi nomor HP harus angka dan panjang wajar
+                    const regexHp = /^[0-9]{8,13}$/;
+                    if (!regexHp.test(nomorHp)) {
+                        alert('Nomor HP harus berupa angka, minimal 8 dan maksimal 13 digit');
+                        return;
+                    }
+
+                    // Jika semua validasi lolos, panggil fungsi kirim pesan
+                    kirimPesan(nama, email, nomorHp);
+                });
+
                 function kirimPesan() {
                     // Ambil nilai dari input
                     const nama = document.getElementById('nama').value;
@@ -184,6 +223,9 @@
 
                     // Buat pesan WhatsApp
                     const pesan = `Halo, saya ${nama}. Email saya ${email}. Nomor HP saya ${nomorHp}.`;
+
+                    // Encode teks agar aman dimasukkan ke URL
+                    const teksEncoded = encodeURIComponent(teksPesan);
 
                     // Buat link dengan nomor tujuan WhatsApp
                     const link = `https://wa.me/6285717252778?text=${encodeURIComponent(pesan)}`;
